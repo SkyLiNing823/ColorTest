@@ -38,7 +38,7 @@ function createBlocks(num) {
         Score = parseInt(scoreNum.innerText);
         Score++;
         scoreNum.innerText = Score;
-        if (count < 25)
+        if (count < 20)
             count++;
         board.innerHTML = "";
         createBlocks(count);
