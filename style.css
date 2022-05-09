@@ -1,0 +1,55 @@
+body {
+    background-color: rgb(174, 112, 232);
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+}
+
+#settingBoard {
+    margin: auto;
+}
+
+#startBtn {
+    margin-left: 10px;
+}
+
+.settingItem {
+    width: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#statusBoard {
+    margin: auto;
+}
+
+#scoreBoard {
+    margin-top: 5px;
+    margin-bottom: 0px;
+}
+
+#remainTime {
+    margin-right: 350px;
+}
+
+.num {
+    font-size: 50px;
+    color: rgb(255, 255, 255);
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#board {
+    margin: auto;
+    margin-top: 5px;
+    width: 700px;
+    height: 700px;
+    font-size: 0px;
+}
+
+.pressBtn {
+    margin: 0px;
+    border: 1px solid rgb(255, 255, 255);
+}
