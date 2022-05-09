@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(174, 112, 232);
+    background-color: rgb(181, 147, 212);
 }
 
 #container {
@@ -51,5 +51,5 @@ body {
 
 .pressBtn {
     margin: 0px;
-    border: 1px solid rgb(255, 255, 255);
+    border: 1px solid rgb(0, 0, 0);
 }

@@ -38,7 +38,8 @@ function createBlocks(num) {
         Score = parseInt(scoreNum.innerText);
         Score++;
         scoreNum.innerText = Score;
-        count++;
+        if (count < 25)
+            count++;
         board.innerHTML = "";
         createBlocks(count);
     })
@@ -57,12 +58,11 @@ startBtn.addEventListener("click", function() {
     clearInterval(countdown);
     clearTimeout(timeout);
 
-    console.log(typeof(Min))
-
     timeout = setTimeout(function() {
+        scoreNum.innerText = "0";
+        remainSec.innerText = "0";
         alert(`時間到！您的分數為: ${Score}`);
         board.innerHTML = "";
-        scoreNum.innerText = "0";
     }, (Min * 60 + Sec) * 1000);
 
     countdown = setInterval(function() {
