@@ -35,7 +35,7 @@ function createBlocks(num) {
         pressBtn.style.height = `${blockLength}px`;
         pressBtn.style.backgroundColor = `rgb(${R}, ${G}, ${B})`;
     });
-    randomNum = Math.floor(Math.random() * 10) + 5;
+    randomNum = Math.floor(Math.random() * 10) + 10;
     switch (mode) {
         case 0:
             ansBtn.style.backgroundColor = `rgb(${R-randomNum}, ${G-randomNum}, ${B-randomNum})`;
@@ -107,7 +107,7 @@ startBtn.addEventListener("click", function() {
     timeout = setTimeout(function() {
         floorNum.innerText = "00";
         scoreNum.innerText = "00";
-        alert(`時間到！您已通過: ${Floor-1}關，總共得到: ${Score}分`);
+        alert(`時間到！您已通過: ${Floor-1} 關，總共得到: ${Score} 分`);
         board.innerHTML = "";
     }, (Min * 60 + Sec) * 1000 + 50);
 
