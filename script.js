@@ -97,9 +97,9 @@ startBtn.addEventListener("click", function() {
         remainSec.innerText = "0" + Sec;
     else
         remainSec.innerText = Sec;
-    floorNum.innerText = "00";
+    floorNum.innerText = "01";
     scoreNum.innerText = "00";
-    Floor = 0;
+    Floor = 1;
     Score = 0;
     clearInterval(countdown);
     clearTimeout(timeout);
@@ -107,7 +107,7 @@ startBtn.addEventListener("click", function() {
     timeout = setTimeout(function() {
         floorNum.innerText = "00";
         scoreNum.innerText = "00";
-        alert(`時間到！您已通過: ${Floor-1} 關，總共得到: ${Score} 分`);
+        alert(`時間到！您已通過: ${Floor-1} 關，總共得到: ${Score} 分！`);
         board.innerHTML = "";
     }, (Min * 60 + Sec) * 1000 + 50);
 
