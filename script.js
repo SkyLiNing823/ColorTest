@@ -63,7 +63,7 @@ startBtn.addEventListener("click", function() {
         remainSec.innerText = "0";
         alert(`時間到！您的分數為: ${Score}`);
         board.innerHTML = "";
-    }, (Min * 60 + Sec) * 1000);
+    }, (Min * 60 + Sec) * 1000 + 50);
 
     countdown = setInterval(function() {
         if (Sec > 0) {
