@@ -1,12 +1,14 @@
 const mins = document.getElementById("min");
 const secs = document.getElementById("sec");
 const startBtn = document.getElementById("startBtn");
-const scoreNum = document.getElementById('scoreNum');
 const remainMin = document.getElementById('remainMin');
 const remainSec = document.getElementById('remainSec');
+const floorNum = document.getElementById('floorNum');
+const scoreNum = document.getElementById('scoreNum');
 const board = document.getElementById('board');
 let countdown;
 let timeout;
+let floor = 1;
 let count = 2;
 
 function createBlocks(num) {
@@ -24,20 +26,56 @@ function createBlocks(num) {
     ansBtn = document.getElementById("ansBtn");
     pressBtn = document.getElementsByClassName("pressBtn");
     blockLength = 700 / count;
-    R = Math.floor(Math.random() * 255);
-    G = Math.floor(Math.random() * 255);
-    B = Math.floor(Math.random() * 255);
+    R = Math.floor(Math.random() * 205) + 50;
+    G = Math.floor(Math.random() * 205) + 50;
+    B = Math.floor(Math.random() * 205) + 50;
+    mode = Math.floor(Math.random() * 8);
     Array.from(pressBtn).forEach(function(pressBtn) { //for every pressBtn
         pressBtn.style.width = `${blockLength}px`;
         pressBtn.style.height = `${blockLength}px`;
         pressBtn.style.backgroundColor = `rgb(${R}, ${G}, ${B})`;
     });
-    randomNum = Math.floor(Math.random() * 10) + 8;
-    ansBtn.style.backgroundColor = `rgb(${R-randomNum}, ${G-randomNum}, ${B-randomNum})`;
+    randomNum = Math.floor(Math.random() * 10) + 5;
+    switch (mode) {
+        case 0:
+            ansBtn.style.backgroundColor = `rgb(${R-randomNum}, ${G-randomNum}, ${B-randomNum})`;
+            break;
+        case 1:
+            ansBtn.style.backgroundColor = `rgb(${R-randomNum}, ${G}, ${B})`;
+            break;
+        case 2:
+            ansBtn.style.backgroundColor = `rgb(${R}, ${G-randomNum}, ${B})`;
+            break;
+        case 3:
+            ansBtn.style.backgroundColor = `rgb(${R}, ${G}, ${B-randomNum})`;
+            break;
+        case 4:
+            ansBtn.style.backgroundColor = `rgb(${R+randomNum}, ${G}, ${B})`;
+            break;
+        case 5:
+            ansBtn.style.backgroundColor = `rgb(${R}, ${G+randomNum}, ${B})`;
+            break;
+        case 6:
+            ansBtn.style.backgroundColor = `rgb(${R}, ${G}, ${B+randomNum})`;
+            break;
+        case 7:
+            ansBtn.style.backgroundColor = `rgb(${R+randomNum}, ${G+randomNum}, ${B+randomNum})`;
+            break;
+    }
+
     ansBtn.addEventListener("click", function() {
+        Floor = parseInt(floorNum.innerText);
         Score = parseInt(scoreNum.innerText);
-        Score++;
-        scoreNum.innerText = Score;
+        Floor += 1;
+        Score += count;
+        if (Floor < 10)
+            floorNum.innerText = "0" + Floor;
+        else
+            floorNum.innerText = Floor;
+        if (Score < 10)
+            scoreNum.innerText = "0" + Score;
+        else
+            scoreNum.innerText = Score;
         if (count < 20)
             count++;
         board.innerHTML = "";
@@ -51,28 +89,42 @@ startBtn.addEventListener("click", function() {
     Sec = parseInt(secs.value);
     if (Min == 0 && Sec == 0)
         Min = 1;
-    remainMin.innerText = Min;
-    remainSec.innerText = Sec;
-    scoreNum.innerText = "0";
+    if (Min < 10)
+        remainMin.innerText = "0" + Min;
+    else
+        remainMin.innerText = Min;
+    if (Sec < 10)
+        remainSec.innerText = "0" + Sec;
+    else
+        remainSec.innerText = Sec;
+    floorNum.innerText = "00";
+    scoreNum.innerText = "00";
+    Floor = 0;
     Score = 0;
     clearInterval(countdown);
     clearTimeout(timeout);
 
     timeout = setTimeout(function() {
-        scoreNum.innerText = "0";
-        remainSec.innerText = "0";
-        alert(`時間到！您的分數為: ${Score}`);
+        floorNum.innerText = "00";
+        scoreNum.innerText = "00";
+        alert(`時間到！您已通過: ${Floor-1}關，總共得到: ${Score}分`);
         board.innerHTML = "";
     }, (Min * 60 + Sec) * 1000 + 50);
 
     countdown = setInterval(function() {
         if (Sec > 0) {
             Sec--;
-            remainSec.innerText = Sec;
+            if (Sec < 10)
+                remainSec.innerText = "0" + Sec;
+            else
+                remainSec.innerText = Sec;
         } else if (Min > 0 && Sec == 0) {
             Min--;
             Sec = 59;
-            remainMin.innerText = Min;
+            if (Min < 10)
+                remainMin.innerText = "0" + Min;
+            else
+                remainMin.innerText = Min;
             remainSec.innerText = "59";
         }
     }, 1000);
