@@ -29,9 +29,9 @@ function createBlocks(num) {
     pressBtn = document.getElementsByClassName("pressBtn");
     otherBtn = document.getElementsByClassName("otherBtn");
     blockLength = 700 / count;
-    R = Math.floor(Math.random() * 180) + 50;
-    G = Math.floor(Math.random() * 180) + 50;
-    B = Math.floor(Math.random() * 180) + 50;
+    R = Math.floor(Math.random() * 160) + 50;
+    G = Math.floor(Math.random() * 160) + 50;
+    B = Math.floor(Math.random() * 160) + 50;
     mode = Math.floor(Math.random() * 8);
     Array.from(pressBtn).forEach(function(pressBtn) { //for every pressBtn
         pressBtn.style.width = `${blockLength}px`;
