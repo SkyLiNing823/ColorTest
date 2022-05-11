@@ -1,6 +1,7 @@
 const mins = document.getElementById("min");
 const secs = document.getElementById("sec");
 const startBtn = document.getElementById("startBtn");
+const remainHP = document.getElementById("remainHP");
 const remainMin = document.getElementById('remainMin');
 const remainSec = document.getElementById('remainSec');
 const floorNum = document.getElementById('floorNum');
@@ -8,6 +9,7 @@ const scoreNum = document.getElementById('scoreNum');
 const board = document.getElementById('board');
 let countdown;
 let timeout;
+let hp = 5;
 let floor = 1;
 let count = 2;
 
@@ -20,11 +22,12 @@ function createBlocks(num) {
             if (i == ansRow && j == ansCol)
                 board.innerHTML += '<button class="pressBtn" id="ansBtn"></button>';
             else
-                board.innerHTML += `<button class="pressBtn" id="${i}x${j}"></button>`;
+                board.innerHTML += `<button class="pressBtn otherBtn" id="${i}x${j}"></button>`;
         }
     }
     ansBtn = document.getElementById("ansBtn");
     pressBtn = document.getElementsByClassName("pressBtn");
+    otherBtn = document.getElementsByClassName("otherBtn");
     blockLength = 700 / count;
     R = Math.floor(Math.random() * 205) + 50;
     G = Math.floor(Math.random() * 205) + 50;
@@ -35,7 +38,7 @@ function createBlocks(num) {
         pressBtn.style.height = `${blockLength}px`;
         pressBtn.style.backgroundColor = `rgb(${R}, ${G}, ${B})`;
     });
-    randomNum = Math.floor(Math.random() * 10) + 10;
+    randomNum = Math.floor(Math.random() * 10) + 15;
     switch (mode) {
         case 0:
             ansBtn.style.backgroundColor = `rgb(${R-randomNum}, ${G-randomNum}, ${B-randomNum})`;
@@ -81,10 +84,30 @@ function createBlocks(num) {
         board.innerHTML = "";
         createBlocks(count);
     })
+
+    for (let i = 0; i < otherBtn.length; i++) {
+        otherBtn[i].addEventListener('click', function() {
+            hp -= 1;
+            remainHP.innerText = "0" + hp;
+            if (hp == 0) {
+                clearInterval(countdown);
+                clearTimeout(timeout);
+                remainMin.innerText = "00";
+                remainSec.innerText = "00";
+                floorNum.innerText = "00";
+                scoreNum.innerText = "00";
+                alert(`您已用盡所有生命值！您已通過: ${Floor-1} 關，總共得到: ${Score} 分！`);
+                board.innerHTML = "";
+            }
+        });
+    }
 }
 
 
 startBtn.addEventListener("click", function() {
+    remainHP.innerText = "05";
+    floorNum.innerText = "01";
+    scoreNum.innerText = "00";
     Min = parseInt(mins.value);
     Sec = parseInt(secs.value);
     if (Min == 0 && Sec == 0)
@@ -97,8 +120,7 @@ startBtn.addEventListener("click", function() {
         remainSec.innerText = "0" + Sec;
     else
         remainSec.innerText = Sec;
-    floorNum.innerText = "01";
-    scoreNum.innerText = "00";
+    hp = 5;
     Floor = 1;
     Score = 0;
     clearInterval(countdown);
