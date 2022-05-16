@@ -11,6 +11,8 @@ const floorNum = document.getElementById('floorNum');
 const scoreNum = document.getElementById('scoreNum');
 const pauseIcon = document.getElementById('pauseIcon');
 const board = document.getElementById('board');
+const audio = document.createElement("audio");
+audio.src = "resources/break.wav";
 let countdown;
 let timeout;
 let hp = 5;
@@ -38,6 +40,8 @@ function clickansBtn() {
 }
 
 function clickotherBtn() {
+    audio.currentTime = 0;
+    audio.play();
     hp -= 1;
     heartControll(hp);
     remainHP.innerText = "0" + hp;
