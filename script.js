@@ -12,7 +12,6 @@ const scoreNum = document.getElementById('scoreNum');
 const pauseIcon = document.getElementById('pauseIcon');
 const board = document.getElementById('board');
 const audio = document.createElement("audio");
-audio.src = "resources/break.wav";
 let countdown;
 let timeout;
 let hp = 5;
@@ -21,6 +20,9 @@ let count = 2;
 let pause = false;
 
 function clickansBtn() {
+    audio.src = "resources/ans.wav";
+    audio.currentTime = 0;
+    audio.play();
     Floor = parseInt(floorNum.innerText);
     Score = parseInt(scoreNum.innerText);
     Floor += 1;
@@ -40,6 +42,7 @@ function clickansBtn() {
 }
 
 function clickotherBtn() {
+    audio.src = "resources/break.wav";
     audio.currentTime = 0;
     audio.play();
     hp -= 1;
@@ -185,6 +188,8 @@ startBtn.addEventListener("click", function() {
 })
 
 pauseBtn.addEventListener("click", function() {
+    Min = parseInt(remainMin.innerText);
+    Sec = parseInt(remainSec.innerText);
     if (pause == false) {
         clearTimeout(timeout);
         clearInterval(countdown);
@@ -194,10 +199,7 @@ pauseBtn.addEventListener("click", function() {
         }
         pauseIcon.src = "resources/play.png";
         pause = true;
-    } else {
-        Min = parseInt(remainMin.innerText);
-        Sec = parseInt(remainSec.innerText);
-        console.log(remainMin.innerText);
+    } else if (Min != 0 && Sec != 0) {
         timeout = setTimeout(timeOut, (Min * 60 + Sec) * 1000 + 50);
         countdown = setInterval(countDown, 1000);
         ansBtn.addEventListener("click", clickansBtn)
