@@ -13,13 +13,20 @@
             <b>時限:</b>
             <input type="number" min="0" max="59" id="min" class="settingItem" value="1"><b>分</b>
             <input type="number" min="0" max="59" id="sec" class="settingItem" value="0"><b>秒</b>
-            <button id="startBtn">開始</button>
-            <button id="pauseBtn"><img id="pauseIcon" src="./resources/pause.png"></button>
-
+            <div style="position: relative; width: 0; height: 0">
+                <button id="startBtn"><img id="startIcon" src="resources/start.png"></button>
+                <button id="pauseBtn"><img id="pauseIcon" src="resources/pause.png"></button>
+            </div>
         </div>
         <div id="statusBoard">
             <div id="remainBoard">
-                <b id="remainLife">剩餘生命:<b id="remainHP" class="num">00</b></b>
+                <b id="remainLife">剩餘生命:
+                <img id="heart1" class="heartIcon" src="resources/hollowHeart.png">
+                <img id="heart2" class="heartIcon" src="resources/hollowHeart.png">
+                <img id="heart3" class="heartIcon" src="resources/hollowHeart.png">
+                <img id="heart4" class="heartIcon" src="resources/hollowHeart.png">
+                <img id="heart5" class="heartIcon" src="resources/hollowHeart.png">
+                <b id="remainHP" class="num">00</b></b>
                 <b id="remainTime">剩餘時間:<b id="remainMin" class="num">00</b><b>分</b><b id="remainSec" class="num">00</b><b>秒</b></b>
             </div>
             <div id="gradeBoard">

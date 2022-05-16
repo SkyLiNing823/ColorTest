@@ -5,26 +5,36 @@ body {
 #container {
     display: flex;
     flex-direction: column;
+    margin: 0px;
 }
 
 #settingBoard {
     margin: auto;
+    margin-top: 5px;
+    padding: relative;
 }
 
 #startBtn {
     margin-left: 10px;
 }
 
+#startBtn,
 #pauseBtn {
     background-color: rgba(255, 255, 255, 0);
     border: 0px;
+    position: absolute;
+    left: 240px;
+    bottom: -15px;
 }
 
+#startBtn {
+    left: 180px;
+}
+
+#startIcon,
 #pauseIcon {
-    position: relative;
-    height: 50px;
-    width: 50px;
-    left: 190px;
+    height: 45px;
+    width: 45px;
 }
 
 .settingItem {
@@ -44,14 +54,27 @@ body {
     flex-direction: column;
 }
 
+#remainBoard {
+    margin-left: 10px;
+}
+
+.heartIcon {
+    height: 30px;
+    width: 30px;
+}
+
+#remainHP {
+    visibility: hidden;
+}
+
 #gradeBoard {
     margin-top: 5px;
     margin-bottom: 0px;
-    margin-left: 320px;
+    margin-left: 280px;
 }
 
 .num {
-    font-size: 50px;
+    font-size: 40px;
     color: rgb(255, 255, 255);
     margin-left: 15px;
     margin-right: 15px;
@@ -60,8 +83,8 @@ body {
 #board {
     margin: auto;
     margin-top: 5px;
-    width: 700px;
-    height: 700px;
+    width: 650px;
+    height: 650px;
     font-size: 0px;
 }
 

@@ -1,8 +1,10 @@
 const mins = document.getElementById("min");
 const secs = document.getElementById("sec");
 const startBtn = document.getElementById("startBtn");
+const startIcon = document.getElementById("startIcon");
 const pauseBtn = document.getElementById("pauseBtn");
 const remainHP = document.getElementById("remainHP");
+const heartIcon = document.getElementsByClassName("heartIcon");
 const remainMin = document.getElementById('remainMin');
 const remainSec = document.getElementById('remainSec');
 const floorNum = document.getElementById('floorNum');
@@ -37,8 +39,10 @@ function clickansBtn() {
 
 function clickotherBtn() {
     hp -= 1;
+    heartControll(hp);
     remainHP.innerText = "0" + hp;
     if (hp == 0) {
+        startIcon.src = "./resources/start.png";
         clearInterval(countdown);
         clearTimeout(timeout);
         remainMin.innerText = "00";
@@ -51,6 +55,7 @@ function clickotherBtn() {
 }
 
 function timeOut() {
+    startIcon.src = "./resources/start.png";
     floorNum.innerText = "00";
     scoreNum.innerText = "00";
     alert(`時間到！您已通過: ${Floor-1} 關，總共得到: ${Score} 分！`);
@@ -76,7 +81,14 @@ function countDown() {
 
 }
 
-
+function heartControll(hp) {
+    for (let i = 0; i < 5; i++) {
+        if (i < hp)
+            heartIcon[i].src = "resources/fullHeart.png"
+        else
+            heartIcon[i].src = "resources/hollowHeart.png"
+    }
+}
 
 function createBlocks(num) {
     board.innerHTML = '';
@@ -93,7 +105,7 @@ function createBlocks(num) {
     ansBtn = document.getElementById("ansBtn");
     pressBtn = document.getElementsByClassName("pressBtn");
     otherBtn = document.getElementsByClassName("otherBtn");
-    blockLength = 700 / count;
+    blockLength = 650 / count;
     R = Math.floor(Math.random() * 160) + 50;
     G = Math.floor(Math.random() * 160) + 50;
     B = Math.floor(Math.random() * 160) + 50;
@@ -137,6 +149,7 @@ function createBlocks(num) {
 }
 
 startBtn.addEventListener("click", function() {
+    startIcon.src = "./resources/reset.png";
     pauseIcon.src = "./resources/pause.png";
     pause = false;
     remainHP.innerText = "05";
@@ -157,6 +170,7 @@ startBtn.addEventListener("click", function() {
     hp = 5;
     Floor = 1;
     Score = 0;
+    heartControll(hp);
     clearTimeout(timeout);
     clearInterval(countdown);
     timeout = setTimeout(timeOut, (Min * 60 + Sec) * 1000 + 50);
@@ -174,7 +188,7 @@ pauseBtn.addEventListener("click", function() {
         for (let i = 0; i < otherBtn.length; i++) {
             otherBtn[i].removeEventListener("click", clickotherBtn);
         }
-        pauseIcon.src = "./resources/play.png";
+        pauseIcon.src = "resources/play.png";
         pause = true;
     } else {
         Min = parseInt(remainMin.innerText);
@@ -186,7 +200,7 @@ pauseBtn.addEventListener("click", function() {
         for (let i = 0; i < otherBtn.length; i++) {
             otherBtn[i].addEventListener("click", clickotherBtn);
         }
-        pauseIcon.src = "./resources/pause.png";
+        pauseIcon.src = "resources/pause.png";
         pause = false;
     }
 })
