@@ -1,15 +1,17 @@
 const mins = document.getElementById("min");
 const secs = document.getElementById("sec");
 const startBtn = document.getElementById("startBtn");
-const startIcon = document.getElementById("startIcon");
 const pauseBtn = document.getElementById("pauseBtn");
+const soundBtn = document.getElementById("soundBtn");
 const remainHP = document.getElementById("remainHP");
-const heartIcon = document.getElementsByClassName("heartIcon");
 const remainMin = document.getElementById('remainMin');
 const remainSec = document.getElementById('remainSec');
 const floorNum = document.getElementById('floorNum');
 const scoreNum = document.getElementById('scoreNum');
+const startIcon = document.getElementById("startIcon");
 const pauseIcon = document.getElementById('pauseIcon');
+const soundIcon = document.getElementById('soundIcon');
+const heartIcon = document.getElementsByClassName("heartIcon");
 const board = document.getElementById('board');
 const audio = document.createElement("audio");
 let countdown;
@@ -18,11 +20,14 @@ let hp = 5;
 let floor = 1;
 let count = 2;
 let pause = false;
+let sound = true;
 
 function clickansBtn() {
-    audio.src = "resources/ans.wav";
-    audio.currentTime = 0;
-    audio.play();
+    if (sound == true) {
+        audio.src = "resources/ans.wav";
+        audio.currentTime = 0;
+        audio.play();
+    }
     Floor = parseInt(floorNum.innerText);
     Score = parseInt(scoreNum.innerText);
     Floor += 1;
@@ -42,9 +47,11 @@ function clickansBtn() {
 }
 
 function clickotherBtn() {
-    audio.src = "resources/break.wav";
-    audio.currentTime = 0;
-    audio.play();
+    if (sound == true) {
+        audio.src = "resources/break.wav";
+        audio.currentTime = 0;
+        audio.play();
+    }
     hp -= 1;
     heartControll(hp);
     remainHP.innerText = "0" + hp;
@@ -208,5 +215,15 @@ pauseBtn.addEventListener("click", function() {
         }
         pauseIcon.src = "resources/pause.png";
         pause = false;
+    }
+})
+
+soundBtn.addEventListener("click", function() {
+    if (sound == true) {
+        soundIcon.src = "resources/sound_off.png";
+        sound = false;
+    } else {
+        soundIcon.src = "resources/sound_on.png";
+        sound = true;
     }
 })
