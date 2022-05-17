@@ -14,6 +14,8 @@ const soundIcon = document.getElementById('soundIcon');
 const heartIcon = document.getElementsByClassName("heartIcon");
 const board = document.getElementById('board');
 const audio = document.createElement("audio");
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+const audioCtx = new AudioContext();
 let countdown;
 let timeout;
 let hp = 5;
