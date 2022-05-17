@@ -26,6 +26,7 @@ let sound = true;
 
 function clickansBtn() {
     if (sound == true) {
+        audio.volume = 1.0;
         audio.src = "resources/ans.wav";
         audio.currentTime = 0;
         audio.play();
@@ -50,6 +51,7 @@ function clickansBtn() {
 
 function clickotherBtn() {
     if (sound == true) {
+        audio.volume = 0.5;
         audio.src = "resources/break.wav";
         audio.currentTime = 0;
         audio.play();
