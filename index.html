@@ -16,7 +16,8 @@
             <div style="position: relative; width: 0; height: 0">
                 <button id="startBtn"><img id="startIcon" src="resources/start.png"></button>
                 <button id="pauseBtn"><img id="pauseIcon" src="resources/pause.png"></button>
-                <button id="soundBtn"><img id="soundIcon" src="resources/sound_on.png"></button>
+                <button id="soundEffectBtn"><img id="soundEffectIcon" src="resources/soundEffect_on.png"></button>
+                <button id="BGMBtn"><img id="BGMIcon" src="resources/BGM_on.png"></button>
             </div>
         </div>
         <div id="statusBoard">
@@ -39,9 +40,11 @@
     <div id="board">
     </div>
     </div>
+    <audio id="soundEffect"></audio>
+    <audio id="BGM" src="resources/BGM.wav" loop="true"></audio>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
     </script>
-    <script src='script.js'></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

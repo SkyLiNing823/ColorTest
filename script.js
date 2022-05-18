@@ -2,34 +2,36 @@ const mins = document.getElementById("min");
 const secs = document.getElementById("sec");
 const startBtn = document.getElementById("startBtn");
 const pauseBtn = document.getElementById("pauseBtn");
-const soundBtn = document.getElementById("soundBtn");
+const soundEffectBtn = document.getElementById("soundEffectBtn");
+const BGMBtn = document.getElementById("BGMBtn");
 const remainHP = document.getElementById("remainHP");
-const remainMin = document.getElementById('remainMin');
-const remainSec = document.getElementById('remainSec');
-const floorNum = document.getElementById('floorNum');
-const scoreNum = document.getElementById('scoreNum');
+const remainMin = document.getElementById("remainMin");
+const remainSec = document.getElementById("remainSec");
+const floorNum = document.getElementById("floorNum");
+const scoreNum = document.getElementById("scoreNum");
 const startIcon = document.getElementById("startIcon");
-const pauseIcon = document.getElementById('pauseIcon');
-const soundIcon = document.getElementById('soundIcon');
+const pauseIcon = document.getElementById("pauseIcon");
+const soundEffectIcon = document.getElementById("soundEffectIcon");
+const BGMIcon = document.getElementById("BGMIcon");
 const heartIcon = document.getElementsByClassName("heartIcon");
-const board = document.getElementById('board');
-const audio = document.createElement("audio");
-const AudioContext = window.AudioContext || window.webkitAudioContext;
-const audioCtx = new AudioContext();
+const board = document.getElementById("board");
+const soundEffect = document.getElementById("soundEffect");
+const BGM = document.getElementById("BGM");
 let countdown;
 let timeout;
 let hp = 5;
 let floor = 1;
 let count = 2;
 let pause = false;
-let sound = true;
+let soundeffect = true;
+let bgm = true;
 
 function clickansBtn() {
-    if (sound == true) {
-        audio.volume = 1.0;
-        audio.src = "resources/ans.wav";
-        audio.currentTime = 0;
-        audio.play();
+    if (soundeffect == true) {
+        soundEffect.volume = 1.0;
+        soundEffect.src = "resources/ans.wav";
+        soundEffect.currentTime = 0;
+        soundEffect.play();
     }
     Floor = parseInt(floorNum.innerText);
     Score = parseInt(scoreNum.innerText);
@@ -50,16 +52,17 @@ function clickansBtn() {
 }
 
 function clickotherBtn() {
-    if (sound == true) {
-        audio.volume = 0.5;
-        audio.src = "resources/break.wav";
-        audio.currentTime = 0;
-        audio.play();
+    if (soundeffect == true) {
+        soundEffect.volume = 0.5;
+        soundEffect.src = "resources/break.wav";
+        soundEffect.currentTime = 0;
+        soundEffect.play();
     }
     hp -= 1;
     heartControll(hp);
     remainHP.innerText = "0" + hp;
     if (hp == 0) {
+        BGM.pause();
         startIcon.src = "./resources/start.png";
         clearInterval(countdown);
         clearTimeout(timeout);
@@ -73,6 +76,7 @@ function clickotherBtn() {
 }
 
 function timeOut() {
+    BGM.pause();
     startIcon.src = "./resources/start.png";
     floorNum.innerText = "00";
     scoreNum.innerText = "00";
@@ -109,7 +113,7 @@ function heartControll(hp) {
 }
 
 function createBlocks(num) {
-    board.innerHTML = '';
+    board.innerHTML = "";
     ansRow = Math.floor(Math.random() * num) + 1;
     ansCol = Math.floor(Math.random() * num) + 1;
     for (let i = 1; i < num + 1; i++) {
@@ -167,6 +171,8 @@ function createBlocks(num) {
 }
 
 startBtn.addEventListener("click", function() {
+    BGM.volume = 0.2;
+    BGM.play();
     startIcon.src = "./resources/reset.png";
     pauseIcon.src = "./resources/pause.png";
     pause = false;
@@ -210,7 +216,7 @@ pauseBtn.addEventListener("click", function() {
         }
         pauseIcon.src = "resources/play.png";
         pause = true;
-    } else if (Min != 0 && Sec != 0) {
+    } else {
         timeout = setTimeout(timeOut, (Min * 60 + Sec) * 1000 + 50);
         countdown = setInterval(countDown, 1000);
         ansBtn.addEventListener("click", clickansBtn)
@@ -222,12 +228,24 @@ pauseBtn.addEventListener("click", function() {
     }
 })
 
-soundBtn.addEventListener("click", function() {
-    if (sound == true) {
-        soundIcon.src = "resources/sound_off.png";
-        sound = false;
+soundEffectBtn.addEventListener("click", function() {
+    if (soundeffect == true) {
+        soundEffectIcon.src = "resources/soundEffect_off.png";
+        soundeffect = false;
     } else {
-        soundIcon.src = "resources/sound_on.png";
-        sound = true;
+        soundEffectIcon.src = "resources/soundEffect_on.png";
+        soundeffect = true;
+    }
+})
+
+BGMBtn.addEventListener("click", function() {
+    if (bgm == true) {
+        BGM.volume = 0;
+        BGMIcon.src = "resources/BGM_off.png";
+        bgm = false;
+    } else {
+        BGM.volume = 0.2;
+        BGMIcon.src = "resources/BGM_on.png";
+        bgm = true;
     }
 })

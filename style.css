@@ -20,7 +20,8 @@ body {
 
 #startBtn,
 #pauseBtn,
-#soundBtn {
+#soundEffectBtn,
+#BGMBtn {
     background-color: rgba(255, 255, 255, 0);
     border: 0px;
     position: absolute;
@@ -29,16 +30,21 @@ body {
 }
 
 #pauseBtn {
-    left: 240px;
+    left: 238px;
 }
 
-#soundBtn {
-    left: 290px;
+#soundEffectBtn {
+    left: 287px;
+}
+
+#BGMBtn {
+    left: 335px;
 }
 
 #startIcon,
 #pauseIcon,
-#soundIcon {
+#soundEffectIcon,
+#BGMIcon {
     height: 45px;
     width: 45px;
 }
