@@ -187,7 +187,8 @@ function createBlocks(num) {
 
 startBtn.addEventListener("click", function() {
     gameStart = true;
-    BGM.play();
+    if (bgm == true)
+        BGM.play();
     startIcon.src = "resources/reset.png";
     pauseIcon.src = "resources/pause.png";
     pause = false;
@@ -257,11 +258,11 @@ soundEffectBtn.addEventListener("click", function() {
 
 BGMBtn.addEventListener("click", function() {
     if (bgm == true) {
-        BGM.volume = 0;
+        BGM.pause();
         BGMIcon.src = "resources/BGM_off.png";
         bgm = false;
     } else {
-        BGM.volume = 0.2;
+        BGM.play();
         BGMIcon.src = "resources/BGM_on.png";
         bgm = true;
     }
