@@ -4,6 +4,7 @@ const startBtn = document.getElementById("startBtn");
 const pauseBtn = document.getElementById("pauseBtn");
 const soundEffectBtn = document.getElementById("soundEffectBtn");
 const BGMBtn = document.getElementById("BGMBtn");
+const hintBtn = document.getElementById("hintBtn");
 const remainHP = document.getElementById("remainHP");
 const remainMin = document.getElementById("remainMin");
 const remainSec = document.getElementById("remainSec");
@@ -13,15 +14,21 @@ const startIcon = document.getElementById("startIcon");
 const pauseIcon = document.getElementById("pauseIcon");
 const soundEffectIcon = document.getElementById("soundEffectIcon");
 const BGMIcon = document.getElementById("BGMIcon");
+const hintIcon = document.getElementById("hintIcon");
 const heartIcon = document.getElementsByClassName("heartIcon");
 const board = document.getElementById("board");
 const soundEffect = document.getElementById("soundEffect");
 const BGM = document.getElementById("BGM");
+BGM.volume = 0.2;
+let ansRow;
+let ansCol;
 let countdown;
 let timeout;
 let hp = 5;
 let floor = 1;
 let count = 2;
+let gameStart = false;
+let hintUsed = false;
 let pause = false;
 let soundeffect = true;
 let bgm = true;
@@ -58,11 +65,13 @@ function clickotherBtn() {
         soundEffect.currentTime = 0;
         soundEffect.play();
     }
-    hp -= 1;
+    hp--;
     heartControll(hp);
     remainHP.innerText = "0" + hp;
-    if (hp == 0) {
-        startIcon.src = "./resources/start.png";
+    if (hp == 1)
+        hintIcon.src = "resources/hint_lock.png";
+    else if (hp == 0) {
+        startIcon.src = "resources/start.png";
         clearInterval(countdown);
         clearTimeout(timeout);
         remainMin.innerText = "00";
@@ -71,15 +80,17 @@ function clickotherBtn() {
         scoreNum.innerText = "00";
         alert(`您已用盡所有生命值！您已通過: ${Floor-1} 關，總共得到: ${Score} 分！`);
         board.innerHTML = "";
+        gameStart = false;
     }
 }
 
 function timeOut() {
-    startIcon.src = "./resources/start.png";
+    startIcon.src = "resources/start.png";
     floorNum.innerText = "00";
     scoreNum.innerText = "00";
     alert(`時間到！您已通過: ${Floor-1} 關，總共得到: ${Score} 分！`);
     board.innerHTML = "";
+    gameStart = false;
 }
 
 function countDown() {
@@ -122,6 +133,11 @@ function createBlocks(num) {
                 board.innerHTML += `<button class="pressBtn otherBtn" id="${i}x${j}"></button>`;
         }
     }
+    if (num < 4)
+        hintIcon.src = "resources/hint_lock.png";
+    else
+        hintIcon.src = "resources/hint.png";
+    hintUsed = false;
     ansBtn = document.getElementById("ansBtn");
     pressBtn = document.getElementsByClassName("pressBtn");
     otherBtn = document.getElementsByClassName("otherBtn");
@@ -169,10 +185,10 @@ function createBlocks(num) {
 }
 
 startBtn.addEventListener("click", function() {
-    BGM.volume = 0.2;
+    gameStart = true;
     BGM.play();
-    startIcon.src = "./resources/reset.png";
-    pauseIcon.src = "./resources/pause.png";
+    startIcon.src = "resources/reset.png";
+    pauseIcon.src = "resources/pause.png";
     pause = false;
     remainHP.innerText = "05";
     floorNum.innerText = "01";
@@ -203,26 +219,28 @@ startBtn.addEventListener("click", function() {
 })
 
 pauseBtn.addEventListener("click", function() {
-    Min = parseInt(remainMin.innerText);
-    Sec = parseInt(remainSec.innerText);
-    if (pause == false) {
-        clearTimeout(timeout);
-        clearInterval(countdown);
-        ansBtn.removeEventListener("click", clickansBtn);
-        for (let i = 0; i < otherBtn.length; i++) {
-            otherBtn[i].removeEventListener("click", clickotherBtn);
+    if (gameStart == true) {
+        Min = parseInt(remainMin.innerText);
+        Sec = parseInt(remainSec.innerText);
+        if (pause == false) {
+            clearTimeout(timeout);
+            clearInterval(countdown);
+            ansBtn.removeEventListener("click", clickansBtn);
+            for (let i = 0; i < otherBtn.length; i++) {
+                otherBtn[i].removeEventListener("click", clickotherBtn);
+            }
+            pauseIcon.src = "resources/play.png";
+            pause = true;
+        } else {
+            timeout = setTimeout(timeOut, (Min * 60 + Sec) * 1000 + 50);
+            countdown = setInterval(countDown, 1000);
+            ansBtn.addEventListener("click", clickansBtn)
+            for (let i = 0; i < otherBtn.length; i++) {
+                otherBtn[i].addEventListener("click", clickotherBtn);
+            }
+            pauseIcon.src = "resources/pause.png";
+            pause = false;
         }
-        pauseIcon.src = "resources/play.png";
-        pause = true;
-    } else {
-        timeout = setTimeout(timeOut, (Min * 60 + Sec) * 1000 + 50);
-        countdown = setInterval(countDown, 1000);
-        ansBtn.addEventListener("click", clickansBtn)
-        for (let i = 0; i < otherBtn.length; i++) {
-            otherBtn[i].addEventListener("click", clickotherBtn);
-        }
-        pauseIcon.src = "resources/pause.png";
-        pause = false;
     }
 })
 
@@ -245,5 +263,55 @@ BGMBtn.addEventListener("click", function() {
         BGM.volume = 0.2;
         BGMIcon.src = "resources/BGM_on.png";
         bgm = true;
+    }
+})
+
+hintBtn.addEventListener("click", function() {
+    if (gameStart == true && hintUsed == false && count > 3) {
+        if (hp > 1) {
+            if (soundeffect == true) {
+                soundEffect.volume = 0.5;
+                soundEffect.src = "resources/hint.mp3";
+                soundEffect.currentTime = 0;
+                soundEffect.play();
+            }
+            hintUsed = true;
+            hintIcon.src = "resources/hint_lock.png";
+            hp--;
+            heartControll(hp);
+            if (ansRow == 1) {
+                rowStart = 1;
+                rowEnd = 3;
+            } else if (ansRow == count) {
+                rowStart = count - 2;
+                rowEnd = count;
+            } else {
+                rowStart = ansRow - 1;
+                rowEnd = ansRow + 1;
+            }
+
+            if (ansCol == 1) {
+                colStart = 1;
+                colEnd = 3;
+            } else if (ansCol == count) {
+                colStart = count - 2;
+                colEnd = count;
+            } else {
+                colStart = ansCol - 1;
+                colEnd = ansCol + 1;
+            }
+            for (let i = 1; i <= count; i++) {
+                for (let j = 1; j <= count; j++) {
+                    if ((i < rowStart || i > rowEnd) || (j < colStart || j > colEnd)) {
+                        document.getElementById(`${i}x${j}`).style.backgroundColor = "rgb(40, 40, 40)";
+                        document.getElementById(`${i}x${j}`).style.border = "1px solid rgb(40, 40, 40)";
+                    }
+                }
+            }
+            if (hp == 1) {
+                hintIcon.src = "resources/hint_lock.png";
+            }
+        }
+
     }
 })
