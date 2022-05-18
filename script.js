@@ -125,7 +125,6 @@ function createBlocks(num) {
     board.innerHTML = "";
     ansRow = Math.floor(Math.random() * num) + 1;
     ansCol = Math.floor(Math.random() * num) + 1;
-
     for (let i = 1; i < num + 1; i++) {
         for (let j = 1; j < num + 1; j++) {
             if (i == ansRow && j == ansCol)
@@ -134,14 +133,12 @@ function createBlocks(num) {
                 board.innerHTML += `<button class="pressBtn otherBtn" id="${i}x${j}"></button>`;
         }
     }
-
     if (num > 3) {
         if (hp > 1)
             hintIcon.src = "resources/hint.png";
     } else
         hintIcon.src = "resources/hint_lock.png";
     hintUsed = false;
-
     ansBtn = document.getElementById("ansBtn");
     pressBtn = document.getElementsByClassName("pressBtn");
     otherBtn = document.getElementsByClassName("otherBtn");
@@ -293,7 +290,6 @@ hintBtn.addEventListener("click", function() {
                 rowStart = ansRow - 1;
                 rowEnd = ansRow + 1;
             }
-
             if (ansCol == 1) {
                 colStart = 1;
                 colEnd = 3;
@@ -316,6 +312,5 @@ hintBtn.addEventListener("click", function() {
                 hintIcon.src = "resources/hint_lock.png";
             }
         }
-
     }
 })
