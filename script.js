@@ -62,7 +62,6 @@ function clickotherBtn() {
     heartControll(hp);
     remainHP.innerText = "0" + hp;
     if (hp == 0) {
-        BGM.pause();
         startIcon.src = "./resources/start.png";
         clearInterval(countdown);
         clearTimeout(timeout);
@@ -76,7 +75,6 @@ function clickotherBtn() {
 }
 
 function timeOut() {
-    BGM.pause();
     startIcon.src = "./resources/start.png";
     floorNum.innerText = "00";
     scoreNum.innerText = "00";
