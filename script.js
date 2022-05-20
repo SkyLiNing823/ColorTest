@@ -17,8 +17,12 @@ const BGMIcon = document.getElementById("BGMIcon");
 const hintIcon = document.getElementById("hintIcon");
 const heartIcon = document.getElementsByClassName("heartIcon");
 const board = document.getElementById("board");
-const soundEffect = document.getElementById("soundEffect");
+const soundEffect_ans = document.getElementById("soundEffect_ans");
+const soundEffect_break = document.getElementById("soundEffect_break");
+const soundEffect_hint = document.getElementById("soundEffect_hint");
 const BGM = document.getElementById("BGM");
+soundEffect_break.volume = 0.4;
+soundEffect_hint.volume = 0.8;
 BGM.volume = 0.2;
 let ansRow;
 let ansCol;
@@ -35,10 +39,8 @@ let bgm = true;
 
 function clickansBtn() {
     if (soundeffect == true) {
-        soundEffect.volume = 1.0;
-        soundEffect.src = "resources/ans.wav";
-        soundEffect.currentTime = 0;
-        soundEffect.play();
+        soundEffect_ans.currentTime = 0;
+        soundEffect_ans.play();
     }
     Floor = parseInt(floorNum.innerText);
     Score = parseInt(scoreNum.innerText);
@@ -60,10 +62,8 @@ function clickansBtn() {
 
 function clickotherBtn() {
     if (soundeffect == true) {
-        soundEffect.volume = 0.5;
-        soundEffect.src = "resources/break.wav";
-        soundEffect.currentTime = 0;
-        soundEffect.play();
+        soundEffect_break.currentTime = 0;
+        soundEffect_break.play();
     }
     hp--;
     heartControll(hp);
@@ -272,10 +272,8 @@ hintBtn.addEventListener("click", function() {
     if (gameStart == true && hintUsed == false && count > 3) {
         if (hp > 1) {
             if (soundeffect == true) {
-                soundEffect.volume = 0.5;
-                soundEffect.src = "resources/hint.mp3";
-                soundEffect.currentTime = 0;
-                soundEffect.play();
+                soundEffect_hint.currentTime = 0;
+                soundEffect_hint.play();
             }
             hintUsed = true;
             hintIcon.src = "resources/hint_lock.png";
