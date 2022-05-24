@@ -16,6 +16,7 @@ const soundEffectIcon = document.getElementById("soundEffectIcon");
 const BGMIcon = document.getElementById("BGMIcon");
 const hintIcon = document.getElementById("hintIcon");
 const heartIcon = document.getElementsByClassName("heartIcon");
+const scoreContent = document.getElementById("scoreContent");
 const board = document.getElementById("board");
 const soundEffect_ans = document.getElementById("soundEffect_ans");
 const soundEffect_break = document.getElementById("soundEffect_break");
@@ -31,6 +32,9 @@ let timeout;
 let hp = 5;
 let floor = 1;
 let count = 2;
+let recordMin;
+let recordSec;
+let record = true;
 let gameStart = false;
 let hintUsed = false;
 let pause = false;
@@ -81,6 +85,8 @@ function clickotherBtn() {
         alert(`您已用盡所有生命值！您已通過: ${Floor-1} 關，總共得到: ${Score} 分！`);
         board.innerHTML = "";
         gameStart = false;
+        if (record == true)
+            recordAdd();
     }
 }
 
@@ -91,6 +97,8 @@ function timeOut() {
     alert(`時間到！您已通過: ${Floor-1} 關，總共得到: ${Score} 分！`);
     board.innerHTML = "";
     gameStart = false;
+    if (record == true)
+        recordAdd();
 }
 
 function countDown() {
@@ -185,7 +193,12 @@ function createBlocks(num) {
     }
 }
 
+function recordAdd() {
+    scoreContent.innerHTML += `<p> >  ${recordMin}m ${recordSec}s 通過 ${Floor-1} 關   ${Score} 分</p>`
+}
+
 startBtn.addEventListener("click", function() {
+    record = true;
     gameStart = true;
     if (bgm == true)
         BGM.play();
@@ -197,6 +210,8 @@ startBtn.addEventListener("click", function() {
     scoreNum.innerText = "00";
     Min = parseInt(mins.value);
     Sec = parseInt(secs.value);
+    recordMin = Min;
+    recordSec = Sec;
     if (Min == 0 && Sec == 0)
         Min = 1;
     if (Min < 10)
@@ -243,6 +258,7 @@ pauseBtn.addEventListener("click", function() {
             pauseIcon.src = "resources/pause.png";
             pause = false;
         }
+        record = false;
     }
 })
 

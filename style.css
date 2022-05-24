@@ -2,11 +2,86 @@ body {
     background-color: rgb(181, 147, 212);
 }
 
+.center {
+    text-align: center;
+}
+
 #container {
     display: flex;
     flex-direction: column;
     margin: auto;
     width: 800px;
+}
+
+#ruleBoard,
+#scoreBoard {
+    position: absolute;
+    width: 400px;
+    right: 20px;
+    top: 50px;
+}
+
+#ruleHead,
+#ruleTail {
+    height: 80px;
+    background-color: rgba(211, 152, 25, 0.775);
+    border: 5px solid;
+    border-radius: 30px;
+    text-align: center;
+}
+
+#ruleContent,
+#scoreContent {
+    margin: auto;
+    overflow: hidden;
+    height: 540px;
+    width: 320px;
+    background-color: rgba(212, 207, 197, 0.775);
+    border-left: 5px solid;
+    border-right: 5px solid;
+    padding: 15px;
+    font-size: 14px;
+}
+
+.ruleIcons {
+    position: relative;
+    top: 4px;
+}
+
+#scoreBoard,
+#scoreHead,
+#scoreTail {
+    background-color: rgb(228, 212, 118);
+}
+
+#scoreBoard {
+    border-radius: 30px;
+    left: 830px;
+}
+
+#scoreHead,
+#scoreTail {
+    height: 80px;
+    text-align: center;
+}
+
+#scoreHead {
+    overflow: hidden;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+#scoreContent {
+    background-color: rgba(0, 0, 0);
+    overflow: auto;
+    border: 0px;
+    font-size: 20px;
+    color: green;
+}
+
+#scoreTail {
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 #settingBoard {
