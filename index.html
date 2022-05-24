@@ -9,49 +9,6 @@
 
 <body>
     <div id="container">
-        <div style="position: relative; width: 0; height: 0">
-            <div id="ruleBoard">
-            </div>
-            <div id="scoreBoard">
-                <div id="scoreHead">
-                    <h1>Scores</h1>
-                </div>
-                <div id="scoreContent">
-                </div>
-                <div id="scoreTail">
-                </div>
-            </div>
-        </div>
-        <div id="settingBoard">
-            <b>時限:</b>
-            <input type="number" min="0" max="59" id="min" class="settingItem" value="1"><b>分</b>
-            <input type="number" min="0" max="59" id="sec" class="settingItem" value="0"><b>秒</b>
-            <div style="position: relative; width: 0; height: 0">
-                <button id="startBtn"><img id="startIcon" src="resources/start.png"></button>
-                <button id="pauseBtn"><img id="pauseIcon" src="resources/pause.png"></button>
-                <button id="soundEffectBtn"><img id="soundEffectIcon" src="resources/soundEffect_on.png"></button>
-                <button id="BGMBtn"><img id="BGMIcon" src="resources/BGM_on.png"></button>
-                <button id="hintBtn"><img id="hintIcon" src="resources/hint.png"></button>
-            </div>
-        </div>
-        <div id="statusBoard">
-            <div id="remainBoard">
-                <b id="remainLife">剩餘生命:
-                <img id="heart1" class="heartIcon" src="resources/hollowHeart.png">
-                <img id="heart2" class="heartIcon" src="resources/hollowHeart.png">
-                <img id="heart3" class="heartIcon" src="resources/hollowHeart.png">
-                <img id="heart4" class="heartIcon" src="resources/hollowHeart.png">
-                <img id="heart5" class="heartIcon" src="resources/hollowHeart.png">
-                <b id="remainHP" class="num">00</b></b>
-                <b id="remainTime">剩餘時間:<b id="remainMin" class="num">00</b><b>分</b><b id="remainSec" class="num">00</b><b>秒</b></b>
-            </div>
-            <div id="gradeBoard">
-                <b id="floor">關卡:<b id="floorNum" class="num">00</b></b>
-                <b id="score">分數:<b id="scoreNum" class="num">00</b></b>
-            </div>
-        </div>
-        <div id="board">
-        </div>
     </div>
     <audio id="soundEffect_ans" src="resources/ans.wav" preload="auto"></audio>
     <audio id="soundEffect_break" src="resources/break.wav" preload="auto"></audio>
