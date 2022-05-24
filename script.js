@@ -16,6 +16,7 @@ const soundEffectIcon = document.getElementById("soundEffectIcon");
 const BGMIcon = document.getElementById("BGMIcon");
 const hintIcon = document.getElementById("hintIcon");
 const heartIcon = document.getElementsByClassName("heartIcon");
+const ruleBoard = document.getElementById("ruleBoard");
 const scoreContent = document.getElementById("scoreContent");
 const board = document.getElementById("board");
 const soundEffect_ans = document.getElementById("soundEffect_ans");
@@ -40,6 +41,41 @@ let hintUsed = false;
 let pause = false;
 let soundeffect = true;
 let bgm = true;
+
+ruleBoard.innerHTML =
+    `
+    <div id="ruleHead">
+        <h1>Rules</h1>
+            </div>
+                <div id="ruleContent">
+                    <div class="center">
+                        <p>
+                            <h3 class="center">~基本規則~</h3>
+                        </p>
+                        <p><b>設定好時限後，點擊<img class="ruleIcons" src="resources/start.png" width="20px" height="20px">即可開始遊戲</b></p>
+                        <p>點擊<b>不同色</b>的方塊即可<b>得分並通往下一關</b>
+                        </p>
+                        <p>點擊<b>同色</b>的方塊將<b>失去1點生命</b>(每局5點)
+                        </p>
+                        <p><b>當剩餘時間或剩餘生命歸0，遊戲結束</b></p>
+                        <p>
+                            <p>
+                                <h3 class="center">~按鈕解說~</h3>
+                            </p>
+                    </div>
+                <div style="padding-left: 20px;">
+                    <p><img class="ruleIcons" src="resources/start.png" width="20px" height="20px"> : 開始遊戲</p>
+                    <p><img class="ruleIcons" src="resources/reset.png" width="20px" height="20px"> : 重置遊戲</p>
+                    <p><img class="ruleIcons" src="resources/pause.png" width="20px" height="20px"><img class="ruleIcons" src="resources/play.png" width="20px" height="20px"> : 暫停/開始遊戲(分數將不會計入記分板)</p>
+                    <p><img class="ruleIcons" src="resources/soundEffect_on.png" width="20px" height="20px"><img class="ruleIcons" src="resources/soundEffect_off.png" width="20px" height="20px"> : 開啟/關閉按鍵音效</p>
+                    <p><img class="ruleIcons" src="resources/BGM_on.png" width="20px" height="20px"><img class="ruleIcons" src="resources/soundEffect_off.png" width="20px" height="20px"> : 開啟/關閉背景音樂</p>
+                    <p><img class="ruleIcons" src="resources/hint.png" width="20px" height="20px"> : 將範圍縮至包含不同色方塊的九宮格</p>
+                    <p>(需支付1點生命，生命剩餘1以及前2關無法使用)</p>
+                </div>
+            </div>
+        <div id="ruleTail">
+    </div>
+    `
 
 function clickansBtn() {
     if (soundeffect == true) {
@@ -194,7 +230,7 @@ function createBlocks(num) {
 }
 
 function recordAdd() {
-    scoreContent.innerHTML += `<p> >  ${recordMin}m ${recordSec}s 通過 ${Floor-1} 關   ${Score} 分</p>`
+    scoreContent.innerHTML += `<p> > ${recordMin}m ${recordSec}s 內通過 ${Floor-1} 關 得到 ${Score} 分</p>`
 }
 
 startBtn.addEventListener("click", function() {
@@ -248,6 +284,7 @@ pauseBtn.addEventListener("click", function() {
             }
             pauseIcon.src = "resources/play.png";
             pause = true;
+            record = false;
         } else {
             timeout = setTimeout(timeOut, (Min * 60 + Sec) * 1000 + 50);
             countdown = setInterval(countDown, 1000);
@@ -258,7 +295,6 @@ pauseBtn.addEventListener("click", function() {
             pauseIcon.src = "resources/pause.png";
             pause = false;
         }
-        record = false;
     }
 })
 
