@@ -18,12 +18,12 @@
 按下後即會剩下含異色方塊的九宮格
 
 # 名詞解釋:
-hp：現有生命值。
-floor：目前通過關卡數。
-count：目前版面行列之邊長(方塊個數)。
-record：遊戲結束後是否紀錄得分。
-gameStart：遊戲是否已經開始。
-hintUsed：是否使用過提示功能。
-pause：是否處於暫停狀態。
-soundeffect：音效是否開啟。
-bgm：BGM是否開啟。
+* hp：現有生命值。
+* floor：目前通過關卡數。
+* count：目前版面行列之邊長(方塊個數)。
+* record：遊戲結束後是否紀錄得分。
+* gameStart：遊戲是否已經開始。
+* hintUsed：是否使用過提示功能。
+* pause：是否處於暫停狀態。
+* soundeffect：音效是否開啟。
+* bgm：BGM是否開啟。
