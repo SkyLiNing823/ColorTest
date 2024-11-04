@@ -28,7 +28,7 @@ container.innerHTML =
                         <p><img class="ruleIcons" src="resources/reset.png" width="20px" height="20px"> : 重置遊戲</p>
                         <p><img class="ruleIcons" src="resources/pause.png" width="20px" height="20px"><img class="ruleIcons" src="resources/play.png" width="20px" height="20px"> : 暫停/開始遊戲(分數將不會計入記分板)</p>
                         <p><img class="ruleIcons" src="resources/soundEffect_on.png" width="20px" height="20px"><img class="ruleIcons" src="resources/soundEffect_off.png" width="20px" height="20px"> : 開啟/關閉按鍵音效</p>
-                        <p><img class="ruleIcons" src="resources/BGM_on.png" width="20px" height="20px"><img class="ruleIcons" src="resources/soundEffect_off.png" width="20px" height="20px"> : 開啟/關閉背景音樂</p>
+                        <p><img class="ruleIcons" src="resources/BGM_on.png" width="20px" height="20px"><img class="ruleIcons" src="resources/BGM_off.png" width="20px" height="20px"> : 開啟/關閉背景音樂</p>
                         <p><img class="ruleIcons" src="resources/hint.png" width="20px" height="20px"> : 將範圍縮至包含異色方塊的九宮格</p>
                         <p>(需支付1點生命，生命剩餘1以及前2關無法使用)</p>
                     </div>
